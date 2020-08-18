@@ -2,6 +2,7 @@ package com.example.todolist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -59,8 +60,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-    @Override
+
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, Aufgabe.class);
+        startActivity(intent);
+
+    }
+
+    public void onItemClickAlt(AdapterView<?> parent, View view, int position, long id) {
         items.remove(position);
         FileHelper.writeData(items, this);
         adapter.notifyDataSetChanged();
