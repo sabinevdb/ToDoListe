@@ -4,23 +4,24 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class AufgabenDbHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
 
     private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + AufgabenContract.Aufgabe.TABLE_NAME + " (" +
-                    AufgabenContract.Aufgabe._ID + " INTEGER PRIMARY KEY," +
-                    AufgabenContract.Aufgabe.COLUMN_NAME_TITLE + " TEXT," +
-                    AufgabenContract.Aufgabe.COLUMN_NAME_COMMENT + " TEXT," +
-                    AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP)";
+            "CREATE TABLE " + AufgabeContract.Aufgabe.TABLE_NAME + " (" +
+                    AufgabeContract.Aufgabe._ID + " INTEGER PRIMARY KEY," +
+                    AufgabeContract.Aufgabe.COLUMN_NAME_TITLE + " TEXT," +
+                    AufgabeContract.Aufgabe.COLUMN_NAME_COMMENT + " TEXT," +
+                    AufgabeContract.Aufgabe.COLUMN_NAME_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP," +
+                    AufgabeContract.Aufgabe.COLUMN_NAME_ATTACHMENT + " TEXT)";
 
     private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + AufgabenContract.Aufgabe.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + AufgabeContract.Aufgabe.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Aufgaben.db";
 
-    public AufgabenDbHelper(Context context) {
+    public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
     public void onCreate(SQLiteDatabase db) {

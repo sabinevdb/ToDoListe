@@ -2,13 +2,15 @@ package com.example.todolist;
 
 import java.util.Date;
 
-public class AufgabeData {
+public class AufgabeModell {
 
-    public AufgabeData(long id, String title, String description, Date timestamp) {
+
+    public AufgabeModell(long id, String title, String description, Date timestamp, String filename) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.timestamp = timestamp;
+        this.filename = filename;
     }
 
     private String title;
@@ -50,4 +52,10 @@ public class AufgabeData {
     public void setTimestamp(Date newName) {
         this.timestamp = newName;
     }
+
+    private String filename;
+
+    public String getFilename() { return filename; }
+
+    public void setFilename(String filename) { this.filename = filename; }
 }
