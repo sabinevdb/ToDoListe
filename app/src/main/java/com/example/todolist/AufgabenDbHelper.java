@@ -11,7 +11,7 @@ public class AufgabenDbHelper extends SQLiteOpenHelper {
                     AufgabenContract.Aufgabe._ID + " INTEGER PRIMARY KEY," +
                     AufgabenContract.Aufgabe.COLUMN_NAME_TITLE + " TEXT," +
                     AufgabenContract.Aufgabe.COLUMN_NAME_COMMENT + " TEXT," +
-                    AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP + " DATE)";
+                    AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP + " DATETIME DEFAULT CURRENT_TIMESTAMP)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + AufgabenContract.Aufgabe.TABLE_NAME;

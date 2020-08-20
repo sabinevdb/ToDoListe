@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DatabaseTest {
 
@@ -19,13 +20,23 @@ public class DatabaseTest {
 
     private Context ctx;
 
+    private String dateTimeToString(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return dateFormat.format(date);
+    }
+
+    private Date dateTimeFromString(String dateStr) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        return dateFormat.parse(dateStr);
+    }
+
     public long Create(String title, String comment, Date date) {
         AufgabenDbHelper dbHelper = new AufgabenDbHelper(ctx);
         SQLiteDatabase dbWrite = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(AufgabenContract.Aufgabe.COLUMN_NAME_TITLE, title);
         values.put(AufgabenContract.Aufgabe.COLUMN_NAME_COMMENT, comment);
-        values.put(AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP, String.valueOf(date));
+        values.put(AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP, dateTimeToString(date));
         long newRowId = dbWrite.insert(AufgabenContract.Aufgabe.TABLE_NAME, null, values);
         dbHelper.close();
         return newRowId;
@@ -65,7 +76,7 @@ public class DatabaseTest {
             Date date= null;
             try {
                 String dateStr = cursor.getString(3);
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(dateStr);
+                date = dateTimeFromString(dateStr);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -82,7 +93,7 @@ public class DatabaseTest {
         ContentValues values = new ContentValues();
         values.put(AufgabenContract.Aufgabe.COLUMN_NAME_TITLE, title);
         values.put(AufgabenContract.Aufgabe.COLUMN_NAME_COMMENT, comment);
-        values.put(AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP, String.valueOf(date));
+        values.put(AufgabenContract.Aufgabe.COLUMN_NAME_TIMESTAMP, dateTimeToString(date));
         String selection = AufgabenContract.Aufgabe._ID + " LIKE ?";
         String[] selectionArgs = {String.valueOf(id)};
 
