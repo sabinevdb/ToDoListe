@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn = findViewById(R.id.add_btn);
         itemsList = findViewById(R.id.items_list);
 
-        items = FileHelper.readData(this);
+        items = FileHelper.readData(this); // TODO read from DB
 
         adapter = new ArrayAdapter<String>(  this, android.R.layout.simple_list_item_1, items);
         itemsList.setAdapter(adapter);
@@ -45,7 +47,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn.setOnClickListener(this);
         itemsList.setOnItemClickListener((AdapterView.OnItemClickListener) this);
 
+        DatabaseTest dbTest = new DatabaseTest(this);
+        long id1 = dbTest.Create("Aufgabe1", "Kommentar1", new Date());
+        long id2 = dbTest.Create("Aufgabe2", "Kommentar2", new Date());
+        long id3 = dbTest.Create("Aufgabe3", "Kommentar3", new Date());
 
+        dbTest.Delete(id2);
+
+        List<AufgabeData> data3 = dbTest.Read(id3);
+
+        List<AufgabeData> data1Alt = dbTest.Read(id1);
+        dbTest.Update(id1, "Aufgabe1 neu", "Kommentar1 neu", new Date());
+        List<AufgabeData> data1Neu = dbTest.Read(id1);
     }
 
     @Override
@@ -55,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String itemEntered = itemET.getText().toString();
                 adapter.add(itemEntered);
                 itemET.setText("");
-                FileHelper.writeData(items, this);
+                FileHelper.writeData(items, this); // TODO write to DB
                 Toast.makeText(this, "Aufgabe hinzugefügt", Toast.LENGTH_SHORT).show();
                 break;
         }
