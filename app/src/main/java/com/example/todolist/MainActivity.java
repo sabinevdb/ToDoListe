@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             items.add(m.getTitle());
         }
 
+        https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
         adapter = new ArrayAdapter<String>(  this, android.R.layout.simple_list_item_1, items);
         itemsList.setAdapter(adapter);
     }
