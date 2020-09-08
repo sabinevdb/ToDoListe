@@ -3,6 +3,8 @@
     package="com.example.todolist">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACTION_OPEN_DOCUMENT" />
 
     <uses-feature android:name="android.hardware.type.watch" />
 
@@ -13,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ZeigeAnhangActivity"></activity>
         <activity android:name=".AufgabeDetailActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

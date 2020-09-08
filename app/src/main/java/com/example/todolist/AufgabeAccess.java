@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class AufgabeAccess {
 
-    // https://developer.android.com/training/data-storage/sqlite
+    // Infoquelle https://developer.android.com/training/data-storage/sqlite
 
     private Context ctx;
 
@@ -60,12 +60,12 @@ public class AufgabeAccess {
         String sortOrder = AufgabeContract.Aufgabe.COLUMN_NAME_COMMENT + " DESC";
 
         Cursor cursor = dbRead.query(
-                AufgabeContract.Aufgabe.TABLE_NAME,   // The table to query
-                projection,                                  // The array of columns to return (pass null to get all)
-                selection,                                   // The columns for the WHERE clause
-                selectionArgs,                               // The values for the WHERE clause
-                null,                              // don't group the rows
-                null,                              // don't filter by row groups
+                AufgabeContract.Aufgabe.TABLE_NAME,     // The table to query
+                projection,                             // The array of columns to return (pass null to get all)
+                selection,                              // The columns for the WHERE clause
+                selectionArgs,                          // The values for the WHERE clause
+                null,                          // don't group the rows
+                null,                           // don't filter by row groups
                 sortOrder                               // The sort order
         );
 
@@ -164,7 +164,6 @@ public class AufgabeAccess {
     }
 
     public AufgabeAccess(Context context) {
-
         ctx = context;
     }
 }
